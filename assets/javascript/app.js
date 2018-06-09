@@ -62,6 +62,7 @@ var clock = {
         if (clock.timer === 0) {
             clock.stop();
             unansweredTally++;
+            playGame();
         }
 
     }// end countdown: function () {
@@ -86,7 +87,7 @@ function showStartButton() {
 };// end function addStartButton(){
 
 function playGame() {
-    showNextQuestion();
+    if (questionNumber < questions.length) showNextQuestion();
     $(".answers").click(function () {
         debug && console.log("pressed answers class");        
         var pressedButton = parseInt(this.id);
@@ -102,12 +103,14 @@ function playGame() {
         }
         clock.stop();
   
-        debug && console.log("correctTally:", correctTally);
-        debug && console.log("incorrectTally:", incorrectTally);
-        debug && console.log("unansweredTally:", unansweredTally);
-      
+       
         if (questionNumber < questions.length) playGame();
     });
+  
+    debug && console.log("correctTally:", correctTally);
+    debug && console.log("incorrectTally:", incorrectTally);
+    debug && console.log("unansweredTally:", unansweredTally);
+  
 };// end function playGame(){
 
 function showNextQuestion() {
